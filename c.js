@@ -19,7 +19,7 @@ console.log("Use browser to get url 'http://localhost:8888/'");
 
 
 function scheduleCronstyle(){
-    schedule.scheduleJob('* 0 * * * *', function(){
+    schedule.scheduleJob('0 0 * * * *', function(){
 		console.log('scheduleCronstyle:' + new Date());
 		run();
     }); 
