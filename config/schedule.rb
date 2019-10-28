@@ -8,7 +8,8 @@
 # set :output, "/path/to/my/cron_log.log"
 #
 every 1.hour do
-  command "sudo node /root/youtube-viewcount-to-google-speadsheet/c.js"
+  command "cd /root/youtube-viewcount-to-google-speadsheet/"
+  command "node c.js"
 end
 #
 # every 4.days do
