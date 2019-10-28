@@ -1,10 +1,21 @@
+var schedule = require('node-schedule');
 const exec = require('child_process').exec;
-var yids = ''
-const gsheet_id = '1nSMVMCMejKXwt6DTnppIzNIHkqP99V_w6dgZ4IBQo5E'
-const gsheet_url = 'http://api.sheetson.com/v1/sheets/1?spreadsheetId=' + gsheet_id
-const get_yids = `curl ${gsheet_url} | jq ".results[].yid"`
 
-exec(get_yids,
+function scheduleCronstyle(){
+    schedule.scheduleJob('5 * * * * *', function(){
+		console.log('scheduleCronstyle:' + new Date());
+		run();
+    }); 
+}
+
+scheduleCronstyle();
+
+function run (){
+	var yids = ''
+	const gsheet_id = '1nSMVMCMejKXwt6DTnppIzNIHkqP99V_w6dgZ4IBQo5E'
+	const gsheet_url = 'http://api.sheetson.com/v1/sheets/1?spreadsheetId=' + gsheet_id
+	const get_yids = `curl ${gsheet_url} | jq ".results[].yid"`
+	exec(get_yids,
 	(error, stdout, stderr) => {
 		yids = stdout.split('\n')
 		console.log(`${stdout}`);
@@ -19,6 +30,7 @@ exec(get_yids,
 			get_views(my_yid)
 		}
 	});
+}
 
 function get_views(yid) {
 	exec('python3 o.py ' + yid,
@@ -49,3 +61,5 @@ function write_data(res_json) {
 			}
 		});
 }
+
+
