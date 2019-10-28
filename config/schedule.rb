@@ -7,7 +7,7 @@
 #
 # set :output, "/path/to/my/cron_log.log"
 #
-every 15.minute do
+every 1.hour do
   command "node /root/youtube-viewcount-to-google-speadsheet/c.js"
 end
 #
