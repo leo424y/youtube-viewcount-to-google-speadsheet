@@ -3,9 +3,10 @@ const exec = require('child_process').exec;
 // Include http module.
 var http = require('http');
 
+scheduleCronstyle();
+
 // Create http server.
 var httpServer = http.createServer(function (req, resp) {
-	scheduleCronstyle();
     resp.writeHead(200, {'Access-Control-Allow-Origin':'*','Content-Type': 'text/plain'});
     resp.write("youtube crawler is running");
     resp.end();
