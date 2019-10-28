@@ -1,14 +1,28 @@
 var schedule = require('node-schedule');
 const exec = require('child_process').exec;
+// Include http module.
+var http = require('http');
+
+// Create http server.
+var httpServer = http.createServer(function (req, resp) {
+	scheduleCronstyle();
+    resp.writeHead(200, {'Access-Control-Allow-Origin':'*','Content-Type': 'text/plain'});
+    resp.write("youtube crawler is running");
+    resp.end();
+});
+
+// Start http server listen on port 8888.
+httpServer.listen(8888);
+
+console.log("Use browser to get url 'http://localhost:8888/'");
+
 
 function scheduleCronstyle(){
-    schedule.scheduleJob('5 * * * * *', function(){
+    schedule.scheduleJob('* 0 * * * *', function(){
 		console.log('scheduleCronstyle:' + new Date());
 		run();
     }); 
 }
-
-scheduleCronstyle();
 
 function run (){
 	var yids = ''
